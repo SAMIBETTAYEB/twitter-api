@@ -149,7 +149,7 @@ class TwitterApi
     public function logUser()
     {
         $data = [
-            'oauth_callback' => config('twitter-api.TWITTER_CALLBACK_URL','http://127.0.0.1:8000'),
+            'oauth_callback' => config('twitter-api.TWITTER_CALLBACK_URL', 'http://127.0.0.1:8000'),
             'oauth_consumer_key' => config('twitter-api.TWITTER_APP_KEY'),
             'oauth_signature_method' => 'HMAC-SHA1',
             'oauth_timestamp' => time(),
