@@ -25,11 +25,11 @@ class TwitterApi
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
         $authHeader = [];
-        if (!$basic) {
+        if (! $basic) {
             if ($basic != -4) {
                 if (config('twitter-api.TWITTER_OAUTH_VERSION') == 2) {
                     $authHeader = [
-                        'Authorization: ' . Cache::get('token'),
+                        'Authorization: '.Cache::get('token'),
                     ];
                 } else {
                     $authHeader = [
@@ -47,10 +47,10 @@ class TwitterApi
                     $data['oauth_signature'] = $this->generateSignature($method, $url, $data);
                     $httpHeaders = [];
                     foreach ($data as $key => $value) {
-                        $httpHeaders[] = urlencode($key) . '="' . urlencode($value) . '"';
+                        $httpHeaders[] = urlencode($key).'="'.urlencode($value).'"';
                     }
 
-                    $authHeader = ['Authorization: OAuth ' . implode(', ', $httpHeaders)];
+                    $authHeader = ['Authorization: OAuth '.implode(', ', $httpHeaders)];
                 }
             }
         }
@@ -60,7 +60,7 @@ class TwitterApi
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postFields));
         }
         if ($basic) {
-            curl_setopt($ch, CURLOPT_USERPWD, $username . ':' . $password);
+            curl_setopt($ch, CURLOPT_USERPWD, $username.':'.$password);
         }
         $response = curl_exec($ch);
         $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
@@ -96,7 +96,7 @@ class TwitterApi
             $secret
         );
         if ($authResponse->header->status_code == 200) {
-            Cache::forever('token', $authResponse->body->token_type . ' ' . $authResponse->body->access_token);
+            Cache::forever('token', $authResponse->body->token_type.' '.$authResponse->body->access_token);
         }
 
         return $authResponse;
@@ -118,7 +118,7 @@ class TwitterApi
             config('twitter-api.TWITTER_APP_SECRET')
         );
         if ($authResponse->header->status_code == 200) {
-            Cache::forever('token', $authResponse->body->token_type . ' ' . $authResponse->body->access_token);
+            Cache::forever('token', $authResponse->body->token_type.' '.$authResponse->body->access_token);
         }
     }
 
@@ -140,8 +140,8 @@ class TwitterApi
 
     public function generateSignature($method = 'GET', $url = 'https://api.twitter.com/oauth/request_token', $data = [], $secret = '')
     {
-        $signData = $method . '&' . urlencode($url) . '&' . urlencode(http_build_query($data));
-        $signKey = urlencode(config('twitter-api.TWITTER_APP_SECRET')) . '&' . urlencode($secret);
+        $signData = $method.'&'.urlencode($url).'&'.urlencode(http_build_query($data));
+        $signKey = urlencode(config('twitter-api.TWITTER_APP_SECRET')).'&'.urlencode($secret);
 
         return base64_encode(hash_hmac('sha1', $signData, $signKey, true));
     }
@@ -157,17 +157,17 @@ class TwitterApi
             'oauth_version' => '1.0',
         ];
         ksort($data);
-        $signData = 'POST&' . urlencode('https://api.twitter.com/oauth/request_token') . '&' . urlencode(http_build_query($data));
+        $signData = 'POST&'.urlencode('https://api.twitter.com/oauth/request_token').'&'.urlencode(http_build_query($data));
         $secret = '';
-        $signKey = urlencode(config('twitter-api.TWITTER_APP_SECRET')) . '&' . urlencode($secret);
+        $signKey = urlencode(config('twitter-api.TWITTER_APP_SECRET')).'&'.urlencode($secret);
         $data['oauth_signature'] = base64_encode(hash_hmac('sha1', $signData, $signKey, true));
         $httpHeaders = [];
         foreach ($data as $key => $value) {
-            $httpHeaders[] = urlencode($key) . '="' . urlencode($value) . '"';
+            $httpHeaders[] = urlencode($key).'="'.urlencode($value).'"';
         }
 
         // Add OAuth header with all data
-        $httpHeaders = 'Authorization: OAuth ' . implode(', ', $httpHeaders);
+        $httpHeaders = 'Authorization: OAuth '.implode(', ', $httpHeaders);
 
         return $this->call('POST', 'https://api.twitter.com/oauth/request_token', [
             $httpHeaders,
@@ -185,17 +185,17 @@ class TwitterApi
             'oauth_version' => '1.0',
         ];
         ksort($data);
-        $signData = 'POST&' . urlencode('https://api.twitter.com/oauth/access_token') . '&' . urlencode(http_build_query($data));
+        $signData = 'POST&'.urlencode('https://api.twitter.com/oauth/access_token').'&'.urlencode(http_build_query($data));
         $secret = '';
-        $signKey = urlencode(config('twitter-api.TWITTER_APP_SECRET')) . '&' . urlencode($secret);
+        $signKey = urlencode(config('twitter-api.TWITTER_APP_SECRET')).'&'.urlencode($secret);
         $data['oauth_signature'] = base64_encode(hash_hmac('sha1', $signData, $signKey, true));
         $httpHeaders = [];
         foreach ($data as $key => $value) {
-            $httpHeaders[] = urlencode($key) . '="' . urlencode($value) . '"';
+            $httpHeaders[] = urlencode($key).'="'.urlencode($value).'"';
         }
 
         // Add OAuth header with all data
-        $httpHeaders = 'Authorization: OAuth ' . implode(', ', $httpHeaders);
+        $httpHeaders = 'Authorization: OAuth '.implode(', ', $httpHeaders);
 
         return $this->call('POST', 'https://api.twitter.com/oauth/access_token', [
             $httpHeaders,
@@ -218,7 +218,7 @@ class TwitterApi
         foreach (explode("\r\n", $header_text) as $i => $line) {
             if ($i === 0) {
                 $headers['http_code'] = $line;
-                // $status = explode(' ', trim($line));
+            // $status = explode(' ', trim($line));
                 // $statusCode = count($status) > 0 ? (int) $status[count($status) - 1] : 0;
                 // $headers['status'] = $statusCode;
             } else {
@@ -227,7 +227,7 @@ class TwitterApi
                 $headers[$key] = $value;
             }
         }
-        if (!in_array('status', array_keys($headers))) {
+        if (! in_array('status', array_keys($headers))) {
             $http_code_segments = explode(' ', trim($headers['http_code']));
             $headers['status'] = $http_code_segments[count($http_code_segments) - 1];
         }
@@ -240,7 +240,7 @@ class TwitterApi
     {
         $twitter = new Twitter($this->appKey, $this->appSecret, $accessToken, $accessTokenSecret);
         $userInfo = $twitter->cachedRequest('account/verify_credentials', ['include_email' => 'true']);
-        if (!empty($userInfo->id)) {
+        if (! empty($userInfo->id)) {
             die('Invalid name or password');
         }
 
