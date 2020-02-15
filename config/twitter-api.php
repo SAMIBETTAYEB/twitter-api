@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'TWITTER_APP_KEY' => env('TWITTER_APP_KEY', 'MAL02976R9xq7zfPuAjxOvtjq'),
+    'TWITTER_APP_SECRET' => env('TWITTER_APP_SECRET', 'VDF3EbtJy427LITLKCkP8hACcnEn82uraxiMxkk6Ws4eU1OEcZ'),
+    'TWITTER_OAUTH_TOKEN' => env('TWITTER_OAUTH_TOKEN', 'iIpXXgAAAAAA1tNBAAABcDpHs94'),
+    'TWITTER_OAUTH_VERSION' => env('TWITTER_OAUTH_VERSION', 1),
+    'REQUEST_CACHE_DIR' => env('REQUEST_CACHE_DIR', storage_path('framework/cache/data')),
+    'REQUEST_CACHE_EXIPRE_AT' => env('REQUEST_CACHE_EXIPRE_AT', '15 seconds'),
+];

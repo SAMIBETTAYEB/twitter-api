@@ -1,0 +1,51 @@
+{
+  "name": "samibettayeb/twitter-api",
+  "description": "A twitter api",
+  "license": "MIT",
+  "keywords": [
+    "twitter",
+    "api"
+  ],
+  "type": "library",
+  "authors": [
+    {
+      "name": "SAMI BETTAYEB",
+      "email": "sami3639@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "ext-curl": "*",
+    "dg/twitter-php": "^4.1",
+    "illuminate/support": "^6.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^4.0",
+    "phpunit/phpunit": "^8.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "samibettayeb\\TwitterApi\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "samibettayeb\\TwitterApi\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "phpunit": "phpunit"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "samibettayeb\\TwitterApi\\ServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
