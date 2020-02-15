@@ -2,9 +2,9 @@
 
 namespace samibettayeb\TwitterApi\Tests;
 
+use Orchestra\Testbench\TestCase;
 use samibettayeb\TwitterApi\Facades\TwitterApi;
 use samibettayeb\TwitterApi\ServiceProvider;
-use Orchestra\Testbench\TestCase;
 
 class TwitterApiTest extends TestCase
 {
