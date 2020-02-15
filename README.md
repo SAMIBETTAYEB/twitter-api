@@ -1,8 +1,8 @@
 # Twitter Api
 
 [![Build Status](https://travis-ci.org/samibettayeb/twitter-api.svg?branch=master)](https://travis-ci.org/samibettayeb/twitter-api)
-[![styleci](https://styleci.io/repos/CHANGEME/240723910)](https://styleci.io/repos/240723910)
-[![Coverage Status](https://coveralls.io/repos/github/samibettayeb/twitter-api/badge.svg?branch=master)](https://coveralls.io/github/samibettayeb/twitter-api?branch=master)
+[![styleci](https://styleci.io/repos/240723910/shield)](https://styleci.io/repos/240723910)
+[![Coverage Status](https://coveralls.io/repos/github/SAMIBETTAYEB/twitter-api/badge.svg?branch=master)](https://coveralls.io/github/samibettayeb/twitter-api?branch=master)
 
 [![Packagist](https://img.shields.io/packagist/v/samibettayeb/twitter-api.svg)](https://packagist.org/packages/samibettayeb/twitter-api)
 [![Packagist](https://poser.pugx.org/samibettayeb/twitter-api/d/total.svg)](https://packagist.org/packages/samibettayeb/twitter-api)
