@@ -241,10 +241,10 @@ class TwitterApi
         $twitter = new Twitter($this->appKey, $this->appSecret, $accessToken, $accessTokenSecret);
         $userInfo = $twitter->cachedRequest('account/verify_credentials', ['include_email' => 'true']);
         if (! empty($userInfo->id)) {
-            die('Invalid name or password');
+            return $userInfo;
         }
 
-        return $userInfo;
+        return null;
     }
 
     public function getUserFavorites($accessToken, $accessTokenSecret, $username, $max_id = '')
