@@ -243,11 +243,21 @@ class TwitterApi
         if (! empty($userInfo->id)) {
             return $userInfo;
         }
-
-        return null;
     }
 
     public function getUserFavorites($accessToken, $accessTokenSecret, $username, $max_id = '')
+    {
+        $twitter = new Twitter($this->appKey, $this->appSecret, $accessToken, $accessTokenSecret);
+        $data = ['count' => 200, 'screen_name' => $username];
+        if ($max_id != '') {
+            $data['max_id'] = $max_id;
+        }
+        $favorites = $twitter->cachedRequest('favorites/list.json', $data);
+
+        return $favorites;
+    }
+
+    public function getUserFavoritesPage($accessToken, $accessTokenSecret, $username, $max_id = '')
     {
         $twitter = new Twitter($this->appKey, $this->appSecret, $accessToken, $accessTokenSecret);
         $data = ['count' => 200, 'screen_name' => $username];
